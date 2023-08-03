@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+ <link rel="stylesheet" href="../stylesheets/style.css">
+ <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+ <div id="nav">
+   <div id="one">
+     <h3>File</h3>
+     <h3>Edit</h3>
+     <h3>Selection</h3>
+     <h3>View</h3>
+     <h3>Go</h3>
+     <h3>Run</h3>
+     <h3>Terminal</h3>
+     <h3>Help</h3>
+   </div>
+   <div id="two">
+     <h3>Visual Studio Code</h3>
+   </div>
+   <div id="three">
+     <i class="ri-subtract-fill"></i>
+     <i class="ri-checkbox-multiple-blank-line"></i>
+     <i class="ri-close-fill"></i>
+   </div>
+ </div>
+ <div id="main">
+  <!-- <div id="popup">
+    <div id="popupcard">
+      <h3>Change Name</h3>
+      <hr>
+      <form action="" method="post">
+        <input name="newname"  id="inp" type="text">
+        <input id="submit" type="submit" value="Change Karo">
+      </form>
+    </div>
+  </div> -->
+   <div id="left">
+     <div id="left1">
+       <div id="ltop">
+         <i class="ri-folders-line"></i>
+         <i class="ri-search-line"></i>
+         <i class="ri-git-branch-line"></i>
+         <i class="ri-bug-line"></i>
+         <i class="ri-layout-grid-line"></i>
+       </div>
+       <div id="lbtm">
+         <i class="ri-settings-2-line"></i>
+         <i class="ri-account-circle-line"></i>
+       </div>
+     </div>
+     <div id="left2">
+       <div id="top">
+         <h3>EXPLORE</h3>
+         <h3>...</h3>
+       </div>
+       <div id="btm">
+         <div id="btop">
+            <h3>Filename</h3>
+           <div id="icon">
+             <i id="fileicon" class="ri-file-add-line"></i>
+             <i id="foldericon" class="ri-folder-add-line"></i>
+             <a href="/back"><i class="ri-loop-right-line"></i></a>
+           </div>
+         </div>
+         <form id="fileform" action="/creatfile">
+           <input type="text" name="filename" placeholder="filename">
+         </form>
+         <form id="folderform" action="/creatfolder">
+           <input type="text" name="foldername" placeholder="foldername">
+         </form>
+          <%files.forEach(function(val){ %>
+           <div class="elem">
+            <div class="elleft">
+             <% if(val.isDirectory()){ %>
+               <i class="ri-folder-line"></i>
+               <%= val.name  %>
+             <%}else{%>
+               <a href="/file/<%= val.name %>">
+                 <i class="ri-file-3-line"></i> 
+               <%= val.name  %>
+               </a>
+               
+            <% }%>
+            </div>
+            <div class="elright">
+             <i id="edit" class="ri-pencil-fill"></i>
+             <% if(val.isDirectory()){ %>
+               <a href="/delete/folder/<%= val.name %>"><i class="ri-delete-bin-7-line"></i></a>
+             <% } else { %>
+               <a href="/delete/file/<%= val.name %>"><i class="ri-delete-bin-7-line"></i></a>
+             <% } %>
+           </div>
+           </div>
+         <% }) %>
+       </div>
+     </div>
+   </div>
+   <div id="right">
+    <div class="rnav">
+      <div class="file"><%=filename%>  <a href="/"><i class="ri-close-line"></i></a></div>
+  </div>
+  <form action="/update/<%=filename%>" method="post">
+      <textarea name="data" style="resize: none;"><%=filedata%></textarea>
+      <input id="submitbtn" type="submit" value="Save File">
+  </form>
+   </div>
+ </div>
+ <script>
+    function donoOffKaro(){
+     document.querySelectorAll("#btm form")
+     .forEach(function(frm){
+       frm.style.display = "none";
+     })
+   }
+  //  document.querySelector("#btm")
+  //   .addEventListener("click", function(dets){
+  //     if(dets.target.id === "edit"){
+  //       var val =  dets.srcElement.parentElement.parentElement.textContent.trim()
+  //       document.querySelector("#inp").value =val;
+  //       document.querySelector("#popup").style.display = "flex";
+  //     }
+  //   })
+   document.querySelector("#icon #fileicon")
+   .addEventListener("click", function(){
+     donoOffKaro();
+     document.querySelector("#fileform").style.display = "block";
+   });
+
+   document.querySelector("#icon #foldericon")
+   .addEventListener("click", function(){
+     donoOffKaro();
+     document.querySelector("#folderform").style.display = "block";
+   });
+ </script>
+</body>
+</html>
